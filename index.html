@@ -58,6 +58,13 @@ ul{list-style:none}
 .nav-cta:hover{background:var(--orange-dark)!important;transform:translateY(-1px)}
 @media(max-width:900px){.nav-links{display:none}}
 
+/* ===== LANG SWITCHER ===== */
+.lang-switcher{display:flex;gap:4px;margin-left:16px;align-items:center;flex-shrink:0}
+.lang-btn{padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);transition:var(--transition);border:1px solid transparent;display:inline-flex;align-items:center;gap:5px;line-height:1}
+.lang-btn:hover{color:var(--white);background:rgba(255,255,255,.14)}
+.lang-btn.active{color:var(--white);background:rgba(243,112,33,.18);border-color:rgba(243,112,33,.5)}
+@media(max-width:900px){.lang-switcher{margin-left:auto}}
+
 /* ===== HERO ===== */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--navy)}
 .hero-bg{position:absolute;inset:0;background:url('https://angloville.pl/wp-content/uploads/2026/01/angloville-junior-baner-2.avif') center/cover no-repeat}
@@ -126,7 +133,7 @@ ul{list-style:none}
 .price-card{background:var(--white);border-radius:var(--radius-lg);padding:40px 36px;box-shadow:var(--shadow);border:2px solid var(--gray-100);position:relative;transition:var(--transition)}
 .price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .price-card.featured{border-color:var(--orange);box-shadow:var(--shadow-lg)}
-.price-card.featured::before{content:'NAJPOPULARNIEJSZY';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:var(--white);padding:6px 20px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:1px}
+.price-popular-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:var(--white);padding:6px 20px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:1px;white-space:nowrap}
 .price-label{font-size:.85rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .price-name{font-size:1.5rem;font-weight:800;color:var(--navy);margin-bottom:4px}
 .price-age{font-size:.9rem;color:var(--gray-600);margin-bottom:24px}
@@ -156,7 +163,7 @@ ul{list-style:none}
 /* ===== INCLUDES ===== */
 .includes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:40px auto 0}
 .include-item{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(243,112,33,.04);border-radius:var(--radius);font-size:.85rem;color:var(--gray-700);font-weight:500}
-.include-item span{font-size:1.2rem}
+.include-item .inc-icon{font-size:1.2rem}
 @media(max-width:800px){.includes-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:500px){.includes-grid{grid-template-columns:1fr}}
 
@@ -268,8 +275,8 @@ ul{list-style:none}
 <div id="pin-gate">
   <div class="pin-box">
     <img src="https://angloville.pl/wp-content/themes/angloville/assets/images/logo.svg" alt="Angloville">
-    <h2>Strona wymaga autoryzacji</h2>
-    <p>Podaj 4-cyfrowy PIN, aby kontynuować</p>
+    <h2 data-i18n="pin.title">Strona wymaga autoryzacji</h2>
+    <p data-i18n="pin.desc">Podaj 4-cyfrowy PIN, aby kontynuować</p>
     <div class="pin-input" id="pin-input">
       <input type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" autofocus>
       <input type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
@@ -277,7 +284,7 @@ ul{list-style:none}
       <input type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
     </div>
     <div class="pin-error" id="pin-error"></div>
-    <button class="pin-btn" onclick="checkPin()">Wejdź na stronę</button>
+    <button class="pin-btn" data-i18n="pin.btn" onclick="checkPin()">Wejdź na stronę</button>
   </div>
 </div>
 
@@ -288,14 +295,18 @@ ul{list-style:none}
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <img src="https://angloville.pl/wp-content/themes/angloville/assets/images/logo.svg" alt="Angloville" class="nav-logo">
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-btn active" data-lang="pl" onclick="switchLang('pl')">🇵🇱 PL</button>
+      <button class="lang-btn" data-lang="pt" onclick="switchLang('pt')">🇧🇷 PT</button>
+    </div>
     <div class="nav-links">
-      <a href="#dlaczego">Dlaczego my</a>
-      <a href="#cennik">Cennik</a>
-      <a href="#turnusy">Turnusy</a>
-      <a href="#program">Program</a>
-      <a href="#opinie">Opinie</a>
+      <a href="#dlaczego" data-i18n="nav.why">Dlaczego my</a>
+      <a href="#cennik" data-i18n="nav.pricing">Cennik</a>
+      <a href="#turnusy" data-i18n="nav.tours">Turnusy</a>
+      <a href="#program" data-i18n="nav.program">Program</a>
+      <a href="#opinie" data-i18n="nav.reviews">Opinie</a>
       <a href="#faq">FAQ</a>
-      <a href="#turnusy" class="nav-cta">Zapisz dziecko →</a>
+      <a href="#turnusy" class="nav-cta" data-i18n="nav.cta">Zapisz dziecko →</a>
     </div>
   </div>
 </nav>
@@ -305,25 +316,25 @@ ul{list-style:none}
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-badge">⭐ Ferie i Wakacje 2026</div>
-    <h1>Obóz językowy, który <span>naprawdę nauczy</span> Twoje dziecko angielskiego</h1>
-    <p class="hero-sub">70 godzin konwersacji z Native Speakerami z UK i USA w formacie 1:2. Metoda immersji językowej potwierdzona przez 15 000+ uczestników.</p>
+    <div class="hero-badge" data-i18n="hero.badge">⭐ Ferie i Wakacje 2026</div>
+    <h1 data-i18n-html="hero.title">Obóz językowy, który <span>naprawdę nauczy</span> Twoje dziecko angielskiego</h1>
+    <p class="hero-sub" data-i18n="hero.sub">70 godzin konwersacji z Native Speakerami z UK i USA w formacie 1:2. Metoda immersji językowej potwierdzona przez 15 000+ uczestników.</p>
     <div class="hero-buttons">
-      <a href="#turnusy" class="btn-primary">Znajdź turnus →</a>
-      <a href="#dlaczego" class="btn-secondary">Dowiedz się więcej</a>
+      <a href="#turnusy" class="btn-primary" data-i18n="hero.btn1">Znajdź turnus →</a>
+      <a href="#dlaczego" class="btn-secondary" data-i18n="hero.btn2">Dowiedz się więcej</a>
     </div>
     <div class="hero-trust">
       <div class="hero-trust-item">
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        4.8/5 na Google (500+ opinii)
+        <span data-i18n="hero.trust1">4.8/5 na Google (500+ opinii)</span>
       </div>
       <div class="hero-trust-item">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        13 lat doświadczenia
+        <span data-i18n="hero.trust2">13 lat doświadczenia</span>
       </div>
       <div class="hero-trust-item">
         <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        15 000+ uczestników
+        <span data-i18n="hero.trust3">15 000+ uczestników</span>
       </div>
     </div>
   </div>
@@ -335,15 +346,15 @@ ul{list-style:none}
     <div class="stats-grid fade-up">
       <div class="stat-card">
         <div class="stat-number">15 000<span>+</span></div>
-        <div class="stat-label">uczestników obozów</div>
+        <div class="stat-label" data-i18n="stat.1">uczestników obozów</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">4.8<span>/5</span></div>
-        <div class="stat-label">ocena na Google</div>
+        <div class="stat-label" data-i18n="stat.2">ocena na Google</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">13</div>
-        <div class="stat-label">lat doświadczenia</div>
+        <div class="stat-label" data-i18n="stat.3">lat doświadczenia</div>
       </div>
     </div>
   </div>
@@ -353,51 +364,51 @@ ul{list-style:none}
 <section class="section" id="dlaczego">
   <div class="container">
     <div class="section-header fade-up">
-      <div class="section-badge">✨ Dlaczego Angloville</div>
-      <h2 class="section-title">Metoda, która daje realne efekty</h2>
-      <p class="section-desc">Nie uczymy gramatyki z podręcznika. Zanurzamy w języku — 70 godzin rozmów z Native Speakerami w formacie 1 native : 2 uczestników.</p>
+      <div class="section-badge" data-i18n="why.badge">✨ Dlaczego Angloville</div>
+      <h2 class="section-title" data-i18n="why.title">Metoda, która daje realne efekty</h2>
+      <p class="section-desc" data-i18n="why.desc">Nie uczymy gramatyki z podręcznika. Zanurzamy w języku — 70 godzin rozmów z Native Speakerami w formacie 1 native : 2 uczestników.</p>
     </div>
     <div class="why-grid">
       <div class="why-card fade-up">
         <div class="why-icon bg-1">🗣️</div>
         <div class="why-body">
-          <h3>Format 1:2 z Native Speakerami</h3>
-          <p>Każdy uczestnik rozmawia bezpośrednio z Native Speakerem z UK, USA lub Irlandii. 1 native speaker na 2 uczestników to gwarancja, że Twoje dziecko będzie MÓWIĆ.</p>
+          <h3 data-i18n="why.1.title">Format 1:2 z Native Speakerami</h3>
+          <p data-i18n="why.1.desc">Każdy uczestnik rozmawia bezpośrednio z Native Speakerem z UK, USA lub Irlandii. 1 native speaker na 2 uczestników to gwarancja, że Twoje dziecko będzie MÓWIĆ.</p>
         </div>
       </div>
       <div class="why-card fade-up">
         <div class="why-icon bg-2">⏱️</div>
         <div class="why-body">
-          <h3>70 godzin konwersacji</h3>
-          <p>Więcej praktyki mówienia w 7 dni niż przez cały rok szkolny. Immersja językowa sprawia, że angielski staje się naturalny — nie wymuszony.</p>
+          <h3 data-i18n="why.2.title">70 godzin konwersacji</h3>
+          <p data-i18n="why.2.desc">Więcej praktyki mówienia w 7 dni niż przez cały rok szkolny. Immersja językowa sprawia, że angielski staje się naturalny — nie wymuszony.</p>
         </div>
       </div>
       <div class="why-card fade-up">
         <div class="why-icon bg-3">🏨</div>
         <div class="why-body">
-          <h3>Hotele z basenami i atrakcjami</h3>
-          <p>Najlepsze ośrodki w Polsce — hotele 3-4★ z basenami, strefami SPA, boiskami. Pełne wyżywienie (3 posiłki), pokoje 2-4-osobowe.</p>
+          <h3 data-i18n="why.3.title">Hotele z basenami i atrakcjami</h3>
+          <p data-i18n="why.3.desc">Najlepsze ośrodki w Polsce — hotele 3-4★ z basenami, strefami SPA, boiskami. Pełne wyżywienie (3 posiłki), pokoje 2-4-osobowe.</p>
         </div>
       </div>
       <div class="why-card fade-up">
         <div class="why-icon bg-4">🎯</div>
         <div class="why-body">
-          <h3>Każdy poziom — od A1 do C2</h3>
-          <p>Test kwalifikacyjny przed obozem. Grupy dobierane według poziomu, żeby każdy czuł się komfortowo i robił postępy.</p>
+          <h3 data-i18n="why.4.title">Każdy poziom — od A1 do C2</h3>
+          <p data-i18n="why.4.desc">Test kwalifikacyjny przed obozem. Grupy dobierane według poziomu, żeby każdy czuł się komfortowo i robił postępy.</p>
         </div>
       </div>
       <div class="why-card fade-up">
         <div class="why-icon bg-5">🛡️</div>
         <div class="why-body">
-          <h3>Pełne bezpieczeństwo</h3>
-          <p>Wykwalifikowana kadra wychowawcza, opieka medyczna 24/7, ubezpieczenie NNW w cenie. Twoje dziecko jest w najlepszych rękach.</p>
+          <h3 data-i18n="why.5.title">Pełne bezpieczeństwo</h3>
+          <p data-i18n="why.5.desc">Wykwalifikowana kadra wychowawcza, opieka medyczna 24/7, ubezpieczenie NNW w cenie. Twoje dziecko jest w najlepszych rękach.</p>
         </div>
       </div>
       <div class="why-card fade-up">
         <div class="why-icon bg-6">🚌</div>
         <div class="why-body">
-          <h3>Transport z 7 miast</h3>
-          <p>Autokar z Warszawy, Krakowa, Katowic, Poznania, Wrocławia, Łodzi i Lublina — w cenie obozu. Wygodnie i bezpiecznie.</p>
+          <h3 data-i18n="why.6.title">Transport z 7 miast</h3>
+          <p data-i18n="why.6.desc">Autokar z Warszawy, Krakowa, Katowic, Poznania, Wrocławia, Łodzi i Lublina — w cenie obozu. Wygodnie i bezpiecznie.</p>
         </div>
       </div>
     </div>
@@ -408,31 +419,32 @@ ul{list-style:none}
 <section class="section section-gray" id="cennik">
   <div class="container">
     <div class="section-header fade-up">
-      <div class="section-badge">💰 Cennik</div>
-      <h2 class="section-title">Inwestycja w przyszłość Twojego dziecka</h2>
-      <p class="section-desc">Wszystko w jednej cenie — bez ukrytych kosztów. Transport, wyżywienie, noclegi, zajęcia, ubezpieczenie.</p>
+      <div class="section-badge" data-i18n="price.badge">💰 Cennik</div>
+      <h2 class="section-title" data-i18n="price.title">Inwestycja w przyszłość Twojego dziecka</h2>
+      <p class="section-desc" data-i18n="price.desc">Wszystko w jednej cenie — bez ukrytych kosztów. Transport, wyżywienie, noclegi, zajęcia, ubezpieczenie.</p>
     </div>
     <div class="pricing-grid">
       <div class="price-card featured fade-up">
-        <div class="price-label">Obóz</div>
+        <span class="price-popular-tag" data-i18n="price.popular">NAJPOPULARNIEJSZY</span>
+        <div class="price-label" data-i18n="price.label">Obóz</div>
         <div class="price-name">Angloville Junior</div>
-        <div class="price-age">dla młodzieży 11–18 lat</div>
-        <div class="price-old">Cena regularna: 4 699 zł</div>
+        <div class="price-age" data-i18n="price.age">dla młodzieży 11–18 lat</div>
+        <div class="price-old" data-i18n="price.old">Cena regularna: 4 699 zł</div>
         <div class="price-amount">
           <span class="big">4 449</span>
-          <span class="unit">zł / os.</span>
+          <span class="unit" data-i18n="price.unit">zł / os.</span>
         </div>
-        <div class="price-discount">🏷️ Zniżka za wczesny zapis</div>
+        <div class="price-discount" data-i18n="price.discount">🏷️ Zniżka za wczesny zapis</div>
         <ul class="price-features">
-          <li>70h konwersacji z Native Speakerami</li>
-          <li>6 noclegów + pełne wyżywienie (3 posiłki)</li>
-          <li>Transport z dużych miast</li>
-          <li>Aktywności, wycieczki, integracja</li>
-          <li>Opieka wychowawcza i medyczna</li>
-          <li>Ubezpieczenie NNW</li>
-          <li>Materiały + Dyplom + Raport Językowy</li>
+          <li data-i18n="price.f1">70h konwersacji z Native Speakerami</li>
+          <li data-i18n="price.f2">6 noclegów + pełne wyżywienie (3 posiłki)</li>
+          <li data-i18n="price.f3">Transport z dużych miast</li>
+          <li data-i18n="price.f4">Aktywności, wycieczki, integracja</li>
+          <li data-i18n="price.f5">Opieka wychowawcza i medyczna</li>
+          <li data-i18n="price.f6">Ubezpieczenie NNW</li>
+          <li data-i18n="price.f7">Materiały + Dyplom + Raport Językowy</li>
         </ul>
-        <a href="#turnusy" class="price-cta">Wybierz turnus →</a>
+        <a href="#turnusy" class="price-cta" data-i18n="price.cta">Wybierz turnus →</a>
       </div>
       <!-- Kids removed — page is Junior only -->
     </div>
@@ -442,32 +454,32 @@ ul{list-style:none}
       <div class="extras-grid">
         <div class="extra-card">
           <div class="extra-icon">💳</div>
-          <h4>Raty 0%</h4>
-          <p>Rozłóż płatność na wygodne raty — do 6 rat 0%. Bez dodatkowych kosztów.</p>
+          <h4 data-i18n="extra.1.title">Raty 0%</h4>
+          <p data-i18n="extra.1.desc">Rozłóż płatność na wygodne raty — do 6 rat 0%. Bez dodatkowych kosztów.</p>
         </div>
         <div class="extra-card">
           <div class="extra-icon">🎓</div>
-          <h4>Zniżka absolwenta</h4>
-          <p>Byłeś już na Angloville? Przysługuje Ci zniżka na kolejny obóz. Wracaj i rozwijaj się!</p>
+          <h4 data-i18n="extra.2.title">Zniżka absolwenta</h4>
+          <p data-i18n="extra.2.desc">Byłeś już na Angloville? Przysługuje Ci zniżka na kolejny obóz. Wracaj i rozwijaj się!</p>
         </div>
         <div class="extra-card">
           <div class="extra-icon">👥</div>
-          <h4>Poleć i zyskaj</h4>
-          <p>Poleć Angloville znajomym — Ty zyskujesz <strong>300 zł</strong> zniżki, a polecona osoba <strong>50 zł</strong>.</p>
+          <h4 data-i18n="extra.3.title">Poleć i zyskaj</h4>
+          <p data-i18n-html="extra.3.desc">Poleć Angloville znajomym — Ty zyskujesz <strong>300 zł</strong> zniżki, a polecona osoba <strong>50 zł</strong>.</p>
         </div>
       </div>
     </div>
 
     <!-- Co zawiera -->
     <div class="includes-grid fade-up">
-      <div class="include-item"><span>🗣️</span> 70h zajęć (format 1:2)</div>
-      <div class="include-item"><span>🏨</span> 6 noclegów</div>
-      <div class="include-item"><span>🍽️</span> 3 posiłki dziennie</div>
-      <div class="include-item"><span>🚌</span> Transport z 7 miast</div>
-      <div class="include-item"><span>🎿</span> Aktywności i wycieczki</div>
-      <div class="include-item"><span>🛡️</span> Ubezpieczenie NNW</div>
-      <div class="include-item"><span>📚</span> Materiały dydaktyczne</div>
-      <div class="include-item"><span>📜</span> Dyplom + Raport</div>
+      <div class="include-item"><span class="inc-icon">🗣️</span> <span data-i18n="inc.1">70h zajęć (format 1:2)</span></div>
+      <div class="include-item"><span class="inc-icon">🏨</span> <span data-i18n="inc.2">6 noclegów</span></div>
+      <div class="include-item"><span class="inc-icon">🍽️</span> <span data-i18n="inc.3">3 posiłki dziennie</span></div>
+      <div class="include-item"><span class="inc-icon">🚌</span> <span data-i18n="inc.4">Transport z 7 miast</span></div>
+      <div class="include-item"><span class="inc-icon">🎿</span> <span data-i18n="inc.5">Aktywności i wycieczki</span></div>
+      <div class="include-item"><span class="inc-icon">🛡️</span> <span data-i18n="inc.6">Ubezpieczenie NNW</span></div>
+      <div class="include-item"><span class="inc-icon">📚</span> <span data-i18n="inc.7">Materiały dydaktyczne</span></div>
+      <div class="include-item"><span class="inc-icon">📜</span> <span data-i18n="inc.8">Dyplom + Raport</span></div>
     </div>
   </div>
 </section>
@@ -476,40 +488,40 @@ ul{list-style:none}
 <section class="section" id="turnusy">
   <div class="container">
     <div class="section-header fade-up">
-      <div class="section-badge">📅 Turnusy 2026</div>
-      <h2 class="section-title">Znajdź idealny termin dla Twojego dziecka</h2>
-      <p class="section-desc">76 turnusów — ferie i wakacje. Filtruj po sezonie, mieście zbiórki i dostępności.</p>
+      <div class="section-badge" data-i18n="tours.badge">📅 Turnusy 2026</div>
+      <h2 class="section-title" data-i18n="tours.title">Znajdź idealny termin dla Twojego dziecka</h2>
+      <p class="section-desc" data-i18n="tours.desc">76 turnusów — ferie i wakacje. Filtruj po sezonie, mieście zbiórki i dostępności.</p>
     </div>
     <div class="tours-filters fade-up">
       <div class="filter-group">
-        <label>Sezon</label>
+        <label data-i18n="tours.filter.season">Sezon</label>
         <select id="filter-season" onchange="filterTours()">
-          <option value="all">Wszystkie</option>
-          <option value="ferie">❄️ Ferie zimowe</option>
-          <option value="wakacje">☀️ Wakacje</option>
+          <option value="all" data-i18n="tours.season.all">Wszystkie</option>
+          <option value="ferie" data-i18n="tours.season.ferie">❄️ Ferie zimowe</option>
+          <option value="wakacje" data-i18n="tours.season.wakacje">☀️ Wakacje</option>
         </select>
       </div>
       <div class="filter-group">
-        <label>Miasto zbiórki</label>
+        <label data-i18n="tours.filter.city">Miasto zbiórki</label>
         <select id="filter-city" onchange="filterTours()">
-          <option value="all">Wszystkie miasta</option>
+          <option value="all" data-i18n="tours.city.all">Wszystkie miasta</option>
         </select>
       </div>
       <div class="filter-group">
-        <label>Dostępność</label>
+        <label data-i18n="tours.filter.avail">Dostępność</label>
         <select id="filter-avail" onchange="filterTours()">
-          <option value="all">Wszystkie</option>
-          <option value="available">✅ Wolne miejsca</option>
-          <option value="last">⚡ Ostatnie miejsca</option>
+          <option value="all" data-i18n="tours.avail.all">Wszystkie</option>
+          <option value="available" data-i18n="tours.avail.available">✅ Wolne miejsca</option>
+          <option value="last" data-i18n="tours.avail.last">⚡ Ostatnie miejsca</option>
         </select>
       </div>
     </div>
     <div class="tours-count fade-up" id="tours-count"></div>
     <div class="tours-grid" id="tours-grid"></div>
     <div class="load-more-wrap" id="load-more-wrap" style="display:none">
-      <button class="load-more" onclick="showMoreTours()">Pokaż więcej turnusów <span id="remaining-count"></span></button>
+      <button class="load-more" onclick="showMoreTours()"><span data-i18n="tours.more">Pokaż więcej turnusów</span> <span id="remaining-count"></span></button>
     </div>
-    <div class="no-results" id="no-results" style="display:none">
+    <div class="no-results" id="no-results" style="display:none" data-i18n="tours.noresults">
       😔 Brak turnusów spełniających kryteria. Spróbuj zmienić filtry.
     </div>
   </div>
@@ -519,57 +531,57 @@ ul{list-style:none}
 <section class="section section-gray" id="program">
   <div class="container">
     <div class="section-header fade-up">
-      <div class="section-badge">📋 Program dnia</div>
-      <h2 class="section-title">Jak wygląda dzień na obozie?</h2>
-      <p class="section-desc">Każdy dzień to intensywne konwersacje z Native Speakerami przeplatane aktywnościami i integracją.</p>
+      <div class="section-badge" data-i18n="prog.badge">📋 Program dnia</div>
+      <h2 class="section-title" data-i18n="prog.title">Jak wygląda dzień na obozie?</h2>
+      <p class="section-desc" data-i18n="prog.desc">Każdy dzień to intensywne konwersacje z Native Speakerami przeplatane aktywnościami i integracją.</p>
     </div>
     <div class="timeline">
       <div class="timeline-item fade-up">
         <div class="timeline-dot">☀️</div>
         <div class="timeline-content">
           <div class="timeline-time">7:30 – 8:30</div>
-          <div class="timeline-title">Śniadanie</div>
-          <div class="timeline-desc">Pełne śniadanie w hotelowej restauracji. Bufet z ciepłymi i zimnymi daniami.</div>
+          <div class="timeline-title" data-i18n="prog.1.title">Śniadanie</div>
+          <div class="timeline-desc" data-i18n="prog.1.desc">Pełne śniadanie w hotelowej restauracji. Bufet z ciepłymi i zimnymi daniami.</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot">🗣️</div>
         <div class="timeline-content">
           <div class="timeline-time">9:00 – 12:30</div>
-          <div class="timeline-title">Sesje konwersacyjne — blok poranny</div>
-          <div class="timeline-desc">Konwersacje z Native Speakerami w formacie 1:2. Tematy dopasowane do poziomu i zainteresowań uczestników.</div>
+          <div class="timeline-title" data-i18n="prog.2.title">Sesje konwersacyjne — blok poranny</div>
+          <div class="timeline-desc" data-i18n="prog.2.desc">Konwersacje z Native Speakerami w formacie 1:2. Tematy dopasowane do poziomu i zainteresowań uczestników.</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot">🍽️</div>
         <div class="timeline-content">
           <div class="timeline-time">12:30 – 13:30</div>
-          <div class="timeline-title">Obiad</div>
-          <div class="timeline-desc">Dwudaniowy obiad. Menu dostosowane do potrzeb dietetycznych.</div>
+          <div class="timeline-title" data-i18n="prog.3.title">Obiad</div>
+          <div class="timeline-desc" data-i18n="prog.3.desc">Dwudaniowy obiad. Menu dostosowane do potrzeb dietetycznych.</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot">🎯</div>
         <div class="timeline-content">
           <div class="timeline-time">14:00 – 16:00</div>
-          <div class="timeline-title">Aktywności i wycieczki</div>
-          <div class="timeline-desc">Basen, sport, gry terenowe, wycieczki — wszystko w języku angielskim z native speakerami.</div>
+          <div class="timeline-title" data-i18n="prog.4.title">Aktywności i wycieczki</div>
+          <div class="timeline-desc" data-i18n="prog.4.desc">Basen, sport, gry terenowe, wycieczki — wszystko w języku angielskim z native speakerami.</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot">📚</div>
         <div class="timeline-content">
           <div class="timeline-time">16:30 – 18:30</div>
-          <div class="timeline-title">Sesje konwersacyjne — blok popołudniowy</div>
-          <div class="timeline-desc">Kontynuacja konwersacji. Warsztaty tematyczne, debaty, scenki sytuacyjne.</div>
+          <div class="timeline-title" data-i18n="prog.5.title">Sesje konwersacyjne — blok popołudniowy</div>
+          <div class="timeline-desc" data-i18n="prog.5.desc">Kontynuacja konwersacji. Warsztaty tematyczne, debaty, scenki sytuacyjne.</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot">🌙</div>
         <div class="timeline-content">
           <div class="timeline-time">19:00 – 21:00</div>
-          <div class="timeline-title">Kolacja i wieczór integracyjny</div>
-          <div class="timeline-desc">Kolacja, a potem wieczorne aktywności: movie night, karaoke, talent show, gry planszowe — po angielsku!</div>
+          <div class="timeline-title" data-i18n="prog.6.title">Kolacja i wieczór integracyjny</div>
+          <div class="timeline-desc" data-i18n="prog.6.desc">Kolacja, a potem wieczorne aktywności: movie night, karaoke, talent show, gry planszowe — po angielsku!</div>
         </div>
       </div>
     </div>
@@ -580,9 +592,9 @@ ul{list-style:none}
 <section class="section" id="opinie">
   <div class="container">
     <div class="section-header fade-up">
-      <div class="section-badge">⭐ Opinie rodziców</div>
-      <h2 class="section-title">Co mówią rodzice uczestników?</h2>
-      <p class="section-desc">Prawdziwe opinie z Google — 4.8/5 na podstawie ponad 500 recenzji.</p>
+      <div class="section-badge" data-i18n="rev.badge">⭐ Opinie rodziców</div>
+      <h2 class="section-title" data-i18n="rev.title">Co mówią rodzice uczestników?</h2>
+      <p class="section-desc" data-i18n="rev.desc">Prawdziwe opinie z Google — 4.8/5 na podstawie ponad 500 recenzji.</p>
     </div>
     <div class="reviews-grid">
       <div class="review-card fade-up">
@@ -596,14 +608,14 @@ ul{list-style:none}
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <p class="review-text">„Mój syn był już 4 raz na Angloville i za każdym razem wraca zachwycony. Nauczyciele świetni z rewelacyjnym podejściem do dzieci i młodzieży. Bardzo polecam!"</p>
+        <p class="review-text" data-i18n="rev.1">„Mój syn był już 4 raz na Angloville i za każdym razem wraca zachwycony. Nauczyciele świetni z rewelacyjnym podejściem do dzieci i młodzieży. Bardzo polecam!"</p>
         <div class="review-author">
           <div class="review-avatar">M</div>
           <div>
             <div class="review-name">Monika Socha</div>
             <div class="review-source">
               <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='14' height='14'%3E%3Cpath fill='%234285F4' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/svg%3E" alt="" style="width:14px;height:14px">
-              Opinia z Google
+              <span data-i18n="rev.source">Opinia z Google</span>
             </div>
           </div>
         </div>
@@ -619,14 +631,14 @@ ul{list-style:none}
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <p class="review-text">„Córka wróciła bardzo zadowolona – fajna atmosfera, relacje z nativami, ciekawy program. Widać efekty – bardzo powiększony zasób słownictwa i zdecydowanie większa swoboda mówienia."</p>
+        <p class="review-text" data-i18n="rev.2">„Córka wróciła bardzo zadowolona – fajna atmosfera, relacje z nativami, ciekawy program. Widać efekty – bardzo powiększony zasób słownictwa i zdecydowanie większa swoboda mówienia."</p>
         <div class="review-author">
           <div class="review-avatar" style="background:var(--navy)">K</div>
           <div>
             <div class="review-name">Katarzyna Matysiak</div>
             <div class="review-source">
               <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='14' height='14'%3E%3Cpath fill='%234285F4' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/svg%3E" alt="" style="width:14px;height:14px">
-              Opinia z Google
+              <span data-i18n="rev.source">Opinia z Google</span>
             </div>
           </div>
         </div>
@@ -642,14 +654,14 @@ ul{list-style:none}
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <p class="review-text">„Młodzież w trakcie obozu bardzo dużo mówi w j. angielskim. Dobra organizacja zajęć, zero korzystania z telefonów, troskliwi opiekunowie. Polecam!"</p>
+        <p class="review-text" data-i18n="rev.3">„Młodzież w trakcie obozu bardzo dużo mówi w j. angielskim. Dobra organizacja zajęć, zero korzystania z telefonów, troskliwi opiekunowie. Polecam!"</p>
         <div class="review-author">
           <div class="review-avatar" style="background:var(--gold);color:var(--navy)">A</div>
           <div>
             <div class="review-name">Anka Cichoń</div>
             <div class="review-source">
               <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='14' height='14'%3E%3Cpath fill='%234285F4' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/svg%3E" alt="" style="width:14px;height:14px">
-              Opinia z Google
+              <span data-i18n="rev.source">Opinia z Google</span>
             </div>
           </div>
         </div>
@@ -663,57 +675,57 @@ ul{list-style:none}
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-badge">❓ FAQ</div>
-      <h2 class="section-title">Najczęściej zadawane pytania</h2>
+      <h2 class="section-title" data-i18n="faq.title">Najczęściej zadawane pytania</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Dla kogo jest obóz Angloville Junior?
+          <span data-i18n="faq.1.q">Dla kogo jest obóz Angloville Junior?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Obóz Angloville Junior jest przeznaczony dla młodzieży w wieku <strong>11–18 lat</strong>, na wszystkich poziomach zaawansowania — od początkującego (A1) po zaawansowany (C2). Przed obozem każdy uczestnik przechodzi test kwalifikacyjny, dzięki czemu grupy są dobierane według poziomu. Nie trzeba mówić płynnie — najważniejsza jest chęć do nauki i otwarcie na rozmowę!</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.1.a">Obóz Angloville Junior jest przeznaczony dla młodzieży w wieku <strong>11–18 lat</strong>, na wszystkich poziomach zaawansowania — od początkującego (A1) po zaawansowany (C2). Przed obozem każdy uczestnik przechodzi test kwalifikacyjny, dzięki czemu grupy są dobierane według poziomu. Nie trzeba mówić płynnie — najważniejsza jest chęć do nauki i otwarcie na rozmowę!</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Jaki poziom angielskiego jest wymagany?
+          <span data-i18n="faq.2.q">Jaki poziom angielskiego jest wymagany?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Żaden konkretny poziom nie jest wymagany — przyjmujemy uczestników <strong>od A1 (początkujący) do C2 (zaawansowany)</strong>. Przed obozem przeprowadzamy test kwalifikacyjny online, na podstawie którego dobieramy grupy. Dzięki temu każdy czuje się komfortowo i robi postępy na swoim poziomie.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.2.a">Żaden konkretny poziom nie jest wymagany — przyjmujemy uczestników <strong>od A1 (początkujący) do C2 (zaawansowany)</strong>. Przed obozem przeprowadzamy test kwalifikacyjny online, na podstawie którego dobieramy grupy. Dzięki temu każdy czuje się komfortowo i robi postępy na swoim poziomie.</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Jak wygląda kwestia bezpieczeństwa?
+          <span data-i18n="faq.3.q">Jak wygląda kwestia bezpieczeństwa?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Bezpieczeństwo uczestników to nasz priorytet. Na obozie zapewniamy: <strong>wykwalifikowaną kadrę wychowawczą</strong> z doświadczeniem w pracy z młodzieżą, <strong>opiekę medyczną</strong> dostępną na miejscu, <strong>ubezpieczenie NNW</strong> w cenie obozu. Kadra jest dostępna 24/7, a proporcja wychowawców do uczestników gwarantuje indywidualną uwagę.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.3.a">Bezpieczeństwo uczestników to nasz priorytet. Na obozie zapewniamy: <strong>wykwalifikowaną kadrę wychowawczą</strong> z doświadczeniem w pracy z młodzieżą, <strong>opiekę medyczną</strong> dostępną na miejscu, <strong>ubezpieczenie NNW</strong> w cenie obozu. Kadra jest dostępna 24/7, a proporcja wychowawców do uczestników gwarantuje indywidualną uwagę.</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Co dokładnie zawiera cena obozu?
+          <span data-i18n="faq.4.q">Co dokładnie zawiera cena obozu?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Cena obejmuje <strong>kompletny pakiet</strong> — bez ukrytych kosztów: 70 godzin konwersacji z Native Speakerami (format 1:2), 6 noclegów w hotelach 3–4★ (pokoje 2–4-osobowe), pełne wyżywienie (3 posiłki dziennie), transport autokarem z dużych miast, aktywności sportowe i wycieczki, opiekę wychowawczą i medyczną, ubezpieczenie NNW, materiały dydaktyczne, dyplom ukończenia i szczegółowy raport językowy.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.4.a">Cena obejmuje <strong>kompletny pakiet</strong> — bez ukrytych kosztów: 70 godzin konwersacji z Native Speakerami (format 1:2), 6 noclegów w hotelach 3–4★ (pokoje 2–4-osobowe), pełne wyżywienie (3 posiłki dziennie), transport autokarem z dużych miast, aktywności sportowe i wycieczki, opiekę wychowawczą i medyczną, ubezpieczenie NNW, materiały dydaktyczne, dyplom ukończenia i szczegółowy raport językowy.</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Czy mogę rozłożyć płatność na raty?
+          <span data-i18n="faq.5.q">Czy mogę rozłożyć płatność na raty?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Tak! Oferujemy możliwość rozłożenia płatności na <strong>do 6 rat 0%</strong> — bez dodatkowych kosztów. Szczegóły dotyczące rat otrzymasz w procesie zapisu.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.5.a">Tak! Oferujemy możliwość rozłożenia płatności na <strong>do 6 rat 0%</strong> — bez dodatkowych kosztów. Szczegóły dotyczące rat otrzymasz w procesie zapisu.</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Skąd jest organizowany transport?
+          <span data-i18n="faq.6.q">Skąd jest organizowany transport?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Organizujemy transport autokarowy z <strong>7 dużych miast</strong>: Warszawa, Kraków, Katowice, Poznań, Wrocław, Łódź i Lublin. Transport jest wliczony w cenę obozu. Dokładne godziny i miejsca zbiórki otrzymasz przed obozem.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.6.a">Organizujemy transport autokarowy z <strong>7 dużych miast</strong>: Warszawa, Kraków, Katowice, Poznań, Wrocław, Łódź i Lublin. Transport jest wliczony w cenę obozu. Dokładne godziny i miejsca zbiórki otrzymasz przed obozem.</div></div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Kim są Native Speakerzy na obozie?
+          <span data-i18n="faq.7.q">Kim są Native Speakerzy na obozie?</span>
           <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">Nasi Native Speakerzy to osoby z <strong>Wielkiej Brytanii, USA i Irlandii</strong> — studenci i młodzi profesjonaliści, którzy przyjeżdżają do Polski w ramach programu wymiany kulturowej. Są starannie wyselekcjonowani i przeszkoleni w metodologii Angloville. Dzięki nim uczestnicy nie tylko uczą się języka, ale też poznają kulturę krajów anglojęzycznych.</div></div>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n-html="faq.7.a">Nasi Native Speakerzy to osoby z <strong>Wielkiej Brytanii, USA i Irlandii</strong> — studenci i młodzi profesjonaliści, którzy przyjeżdżają do Polski w ramach programu wymiany kulturowej. Są starannie wyselekcjonowani i przeszkoleni w metodologii Angloville. Dzięki nim uczestnicy nie tylko uczą się języka, ale też poznają kulturę krajów anglojęzycznych.</div></div>
       </div>
     </div>
   </div>
@@ -724,9 +736,9 @@ ul{list-style:none}
   <div class="cta-bg"></div>
   <div class="cta-overlay"></div>
   <div class="cta-content fade-up">
-    <h2>Daj swojemu dziecku przewagę na całe życie</h2>
-    <p>7 dni immersji językowej = więcej mówienia po angielsku niż przez cały rok szkolny. Zapisz się teraz i skorzystaj ze zniżki za wczesny zapis.</p>
-    <a href="#turnusy" class="btn-primary">Znajdź turnus i zapisz dziecko →</a>
+    <h2 data-i18n="cta.title">Daj swojemu dziecku przewagę na całe życie</h2>
+    <p data-i18n="cta.desc">7 dni immersji językowej = więcej mówienia po angielsku niż przez cały rok szkolny. Zapisz się teraz i skorzystaj ze zniżki za wczesny zapis.</p>
+    <a href="#turnusy" class="btn-primary" data-i18n="cta.btn">Znajdź turnus i zapisz dziecko →</a>
   </div>
 </section>
 
@@ -736,40 +748,40 @@ ul{list-style:none}
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="https://angloville.pl/wp-content/themes/angloville/assets/images/logo.svg" alt="Angloville">
-        <p>Angloville — najskuteczniejsze obozy językowe w Polsce. 13 lat doświadczenia, 15 000+ uczestników, format 1:2 z Native Speakerami.</p>
+        <p data-i18n="foot.brand">Angloville — najskuteczniejsze obozy językowe w Polsce. 13 lat doświadczenia, 15 000+ uczestników, format 1:2 z Native Speakerami.</p>
       </div>
       <div>
-        <h4>Nawigacja</h4>
-        <a href="#dlaczego">Dlaczego my</a>
-        <a href="#cennik">Cennik</a>
-        <a href="#turnusy">Turnusy</a>
-        <a href="#program">Program</a>
-        <a href="#opinie">Opinie</a>
+        <h4 data-i18n="foot.nav">Nawigacja</h4>
+        <a href="#dlaczego" data-i18n="nav.why">Dlaczego my</a>
+        <a href="#cennik" data-i18n="nav.pricing">Cennik</a>
+        <a href="#turnusy" data-i18n="nav.tours">Turnusy</a>
+        <a href="#program" data-i18n="nav.program">Program</a>
+        <a href="#opinie" data-i18n="nav.reviews">Opinie</a>
         <a href="#faq">FAQ</a>
       </div>
       <div>
-        <h4>Kontakt</h4>
+        <h4 data-i18n="foot.contact">Kontakt</h4>
         <a href="tel:+48533655147">📞 533 655 147</a>
         <a href="mailto:kontakt@angloville.pl">✉️ kontakt@angloville.pl</a>
         <a href="https://angloville.pl" target="_blank" rel="noopener">🌐 angloville.pl</a>
       </div>
       <div>
-        <h4>Informacje</h4>
-        <a href="https://angloville.pl" target="_blank" rel="noopener">Strona główna</a>
-        <a href="https://angloville.pl/regulamin" target="_blank" rel="noopener">Regulamin</a>
-        <a href="https://angloville.pl/polityka-prywatnosci" target="_blank" rel="noopener">Polityka prywatności</a>
+        <h4 data-i18n="foot.info">Informacje</h4>
+        <a href="https://angloville.pl" target="_blank" rel="noopener" data-i18n="foot.home">Strona główna</a>
+        <a href="https://angloville.pl/regulamin" target="_blank" rel="noopener" data-i18n="foot.terms">Regulamin</a>
+        <a href="https://angloville.pl/polityka-prywatnosci" target="_blank" rel="noopener" data-i18n="foot.privacy">Polityka prywatności</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Angloville. Wszelkie prawa zastrzeżone.</span>
-      <span>Obóz językowy z Native Speakerami 🇬🇧🇺🇸🇮🇪</span>
+      <span data-i18n="foot.copy">© 2026 Angloville. Wszelkie prawa zastrzeżone.</span>
+      <span data-i18n="foot.camp">Obóz językowy z Native Speakerami 🇬🇧🇺🇸🇮🇪</span>
     </div>
   </div>
 </footer>
 
 <!-- MOBILE STICKY CTA -->
 <div class="mobile-cta" id="mobile-cta">
-  <a href="#turnusy">Zapisz dziecko na obóz →</a>
+  <a href="#turnusy" data-i18n="mobile.cta">Zapisz dziecko na obóz →</a>
 </div>
 
 </div><!-- /main-content -->
@@ -890,7 +902,8 @@ function filterTours(){
 function updateCount(){
   const el = document.getElementById('tours-count');
   const avail = filteredTours.filter(t=>t.s>0).length;
-  el.innerHTML = 'Znaleziono <strong>'+filteredTours.length+'</strong> turnusów (w tym <strong>'+avail+'</strong> z wolnymi miejscami)';
+  if(currentLang==='pt') el.innerHTML='Encontrados <strong>'+filteredTours.length+'</strong> turnos (incluindo <strong>'+avail+'</strong> com vagas)';
+  else el.innerHTML = 'Znaleziono <strong>'+filteredTours.length+'</strong> turnusów (w tym <strong>'+avail+'</strong> z wolnymi miejscami)';
 }
 
 function showMoreTours(){
@@ -903,9 +916,9 @@ function showMoreTours(){
     card.className = 'tour-card fade-up';
 
     let badgeClass, badgeText;
-    if(t.s===0){ badgeClass='badge-sold'; badgeText='Wyprzedany'; }
-    else if(t.s===1){ badgeClass='badge-last'; badgeText='Ostatnie miejsca!'; }
-    else { badgeClass='badge-available'; badgeText='Wolne miejsca'; }
+    if(t.s===0){ badgeClass='badge-sold'; badgeText=currentLang==='pt'?'Esgotado':'Wyprzedany'; }
+    else if(t.s===1){ badgeClass='badge-last'; badgeText=currentLang==='pt'?'Últimas vagas!':'Ostatnie miejsca!'; }
+    else { badgeClass='badge-available'; badgeText=currentLang==='pt'?'Vagas disponíveis':'Wolne miejsca'; }
 
     const isSold = t.s === 0;
     const seasonBadge = t.sn==='ferie' ? '❄️' : '☀️';
@@ -920,7 +933,7 @@ function showMoreTours(){
           <span class="tour-badge ${badgeClass}">${badgeText}</span>
           ${isSold
             ? '<span class="tour-book disabled">Wyprzedany</span>'
-            : '<a href="'+t.l+'" target="_blank" rel="noopener" class="tour-book">Zapisz się →</a>'
+            : '<a href="'+t.l+'" target="_blank" rel="noopener" class="tour-book">'+(currentLang==='pt'?'Inscreva-se →':'Zapisz się →')+'</a>'
           }
         </div>
       </div>`;
@@ -975,6 +988,96 @@ function initPage(){
   filterTours();
   setTimeout(initObserver, 100);
 }
+
+// ===== i18n =====
+const I18N={pt:{
+"pin.title":"Página protegida","pin.desc":"Digite o PIN de 4 dígitos para continuar","pin.btn":"Acessar",
+"nav.why":"Por que nós","nav.pricing":"Preços","nav.tours":"Datas","nav.program":"Programa","nav.reviews":"Avaliações","nav.cta":"Inscreva seu filho →",
+"hero.badge":"⭐ Férias de Inverno e Verão 2026",
+"hero.sub":"70 horas de conversação com Falantes Nativos do Reino Unido e EUA no formato 1:2. Método de imersão linguística comprovado por mais de 15.000 participantes.",
+"hero.btn1":"Encontre uma data →","hero.btn2":"Saiba mais",
+"hero.trust1":"4.8/5 no Google (500+ avaliações)","hero.trust2":"13 anos de experiência","hero.trust3":"15.000+ participantes",
+"stat.1":"participantes","stat.2":"avaliação no Google","stat.3":"anos de experiência",
+"why.badge":"✨ Por que Angloville","why.title":"Um método que traz resultados reais","why.desc":"Não ensinamos gramática com livros. Mergulhamos no idioma — 70 horas de conversas com Falantes Nativos no formato 1 nativo : 2 participantes.",
+"why.1.title":"Formato 1:2 com Falantes Nativos","why.1.desc":"Cada participante conversa diretamente com um Falante Nativo do Reino Unido, EUA ou Irlanda. 1 nativo para 2 participantes garante que seu filho VAI FALAR.",
+"why.2.title":"70 horas de conversação","why.2.desc":"Mais prática de fala em 7 dias do que em um ano escolar inteiro. A imersão faz o inglês se tornar natural.",
+"why.3.title":"Hotéis com piscinas e atrações","why.3.desc":"Os melhores centros na Polônia — hotéis 3-4★ com piscinas, áreas de SPA, quadras esportivas. Pensão completa (3 refeições), quartos de 2-4 pessoas.",
+"why.4.title":"Todos os níveis — de A1 a C2","why.4.desc":"Teste de nivelamento antes do acampamento. Grupos organizados por nível. Seu filho progride no ritmo dele.",
+"why.5.title":"Segurança e cuidado 24/7","why.5.desc":"Equipe pedagógica experiente, assistência médica, seguro NNW incluído. Proporção equipe:participantes garante atenção individual.",
+"why.6.title":"Líder na Polônia desde 2011","why.6.desc":"13 anos de experiência, 15.000+ participantes satisfeitos, nota 4.8/5 no Google. Inscrito no Registro de Organizadores de Turismo.",
+"price.badge":"💰 Preços","price.title":"Investimento no futuro do seu filho","price.desc":"Tudo incluído em um preço — sem custos ocultos. Transporte, alimentação, hospedagem, aulas, seguro.",
+"price.popular":"MAIS POPULAR","price.label":"Acampamento","price.age":"para jovens de 11–18 anos","price.old":"Preço regular: 4 699 zł","price.unit":"zł / pessoa","price.discount":"🏷️ Desconto por inscrição antecipada",
+"price.f1":"70h de conversação com Falantes Nativos","price.f2":"6 noites + pensão completa (3 refeições)","price.f3":"Transporte das grandes cidades","price.f4":"Atividades, excursões, integração","price.f5":"Supervisão pedagógica e médica","price.f6":"Seguro NNW","price.f7":"Materiais + Diploma + Relatório Linguístico",
+"price.cta":"Escolha uma data →",
+"extra.1.title":"Parcelamento 0%","extra.1.desc":"Divida o pagamento em até 6 parcelas sem juros.",
+"extra.2.title":"Desconto para ex-alunos","extra.2.desc":"Já participou do Angloville? Você tem direito a desconto no próximo acampamento!",
+"extra.3.title":"Indique e ganhe","extra.3.desc":"Indique o Angloville para amigos — você ganha <strong>300 zł</strong> de desconto e o indicado <strong>50 zł</strong>.",
+"tours.badge":"📅 Datas","tours.title":"Encontre o turno ideal","tours.desc":"76 turnos na temporada de Férias de Inverno e Verão 2026",
+"tours.season.all":"Todos","tours.season.ferie":"❄️ Inverno","tours.season.wakacje":"☀️ Verão",
+"tours.city.all":"📍 Todas as cidades","tours.avail.all":"Disponibilidade","tours.avail.available":"✅ Vagas disponíveis","tours.avail.last":"⚠️ Últimas vagas",
+"tours.more":"Mostrar mais","tours.noresults":"Nenhum turno encontrado para os filtros selecionados.",
+"prog.badge":"🗓️ Programa","prog.title":"Um dia típico no acampamento","prog.desc":"Da manhã à noite — inglês o tempo todo!",
+"prog.1.title":"Café da manhã","prog.1.desc":"Refeição nutritiva para começar o dia com energia",
+"prog.2.title":"Sessão com Mentor 1:2","prog.2.desc":"Conversas, jogos e projetos com Falante Nativo",
+"prog.3.title":"Sessão linguística 1:2","prog.3.desc":"Debates, negociações e jogos de papéis",
+"prog.4.title":"Almoço + Tempo livre","prog.4.desc":"Almoço, relaxamento, esportes e diversão",
+"prog.5.title":"Oficinas com Mentor","prog.5.desc":"Projetos criativos e culturais em inglês",
+"prog.6.title":"Jantar + Social Time","prog.6.desc":"Jantar e atividades sociais de integração",
+"rev.badge":"💬 Avaliações","rev.title":"O que dizem os pais e participantes","rev.desc":"Avaliação 4.8/5 no Google com mais de 1.900 avaliações",
+"rev.1":"Meu filho já foi 4 vezes ao Angloville e volta encantado todas as vezes. Professores excelentes com uma abordagem incrível com crianças e jovens. Recomendo muito!",
+"rev.2":"Minha filha voltou muito satisfeita — ótima atmosfera, relações com os nativos, programa interessante. Os resultados são visíveis — vocabulário muito maior e muito mais fluência na fala.",
+"rev.3":"Os jovens durante o acampamento falam muito em inglês. Boa organização das atividades, zero uso de celulares, supervisores atenciosos. Recomendo!",
+"rev.source":"Baseado em avaliações do Google",
+"faq.title":"Perguntas frequentes",
+"faq.1.q":"🎯 Para quem é o acampamento Angloville Junior?",
+"faq.2.q":"📊 É necessário algum nível específico de inglês?",
+"faq.3.q":"🛡️ Como é a segurança no acampamento?",
+"faq.4.q":"💰 O que exatamente está incluído no preço?",
+"faq.5.q":"💳 Posso pagar parcelado?",
+"faq.6.q":"🚌 De onde sai o transporte?",
+"faq.7.q":"🇬🇧 Quem são os Falantes Nativos?",
+"cta.title":"Pronto para a aventura linguística?","cta.desc":"Inscreva seu filho e dê a ele a chance de quebrar a barreira do idioma — em 7 dias.","cta.btn":"Escolha uma data →",
+"mobile.cta":"Inscreva-se →",
+"foot.nav":"Navegação","foot.contact":"Contato","foot.info":"Informações","foot.camp":"Acampamentos para crianças","foot.home":"Página inicial","foot.terms":"Regulamento","foot.privacy":"Política de privacidade","foot.brand":"Líder em turismo educacional na Polônia desde 2011.","foot.copy":"© 2026 Angloville sp. z o.o. Todos os direitos reservados."
+}};
+const I18N_HTML={pt:{
+"hero.title":"Acampamento de idiomas que <span>realmente vai ensinar</span> seu filho a falar inglês",
+"extra.3.desc":"Indique o Angloville para amigos — você ganha <strong>300 zł</strong> de desconto e o indicado <strong>50 zł</strong>.",
+"faq.1.a":"O acampamento Angloville Junior é destinado a jovens de <strong>11 a 18 anos</strong>, de todos os níveis — do iniciante (A1) ao avançado (C2). Antes do acampamento, cada participante faz um teste de nivelamento para que os grupos sejam formados por nível. Não é preciso falar fluentemente — o mais importante é a vontade de aprender!",
+"faq.2.a":"Nenhum nível específico é exigido — aceitamos participantes <strong>do A1 (iniciante) ao C2 (avançado)</strong>. Antes do acampamento, realizamos um teste de nivelamento online para formar grupos adequados.",
+"faq.3.a":"A segurança é nossa prioridade. No acampamento garantimos: <strong>equipe pedagógica qualificada</strong>, <strong>assistência médica</strong> disponível no local, <strong>seguro NNW</strong> incluído no preço. A equipe está disponível 24/7.",
+"faq.4.a":"O preço inclui o <strong>pacote completo</strong>: 70 horas de conversação com Falantes Nativos (formato 1:2), 6 noites em hotéis 3-4★ (quartos de 2-4 pessoas), pensão completa (3 refeições por dia), transporte de ônibus das grandes cidades, atividades esportivas e excursões, supervisão pedagógica e médica, seguro NNW, materiais didáticos, diploma e relatório linguístico detalhado.",
+"faq.5.a":"Sim! Oferecemos parcelamento em <strong>até 6x sem juros</strong>. Os detalhes serão informados durante o processo de inscrição.",
+"faq.6.a":"Organizamos transporte de ônibus de <strong>7 grandes cidades</strong>: Varsóvia, Cracóvia, Katowice, Poznań, Wrocław, Łódź e Lublin. O transporte está incluído no preço.",
+"faq.7.a":"Nossos Falantes Nativos são do <strong>Reino Unido, EUA e Irlanda</strong> — estudantes e jovens profissionais que vêm à Polônia no programa de intercâmbio cultural. São cuidadosamente selecionados e treinados na metodologia Angloville."
+}};
+const STATUS_PT={0:'Esgotado',1:'Últimas vagas',2:'Vagas disponíveis',3:'Vagas disponíveis'};
+const STATUS_PL={0:'Wyprzedany',1:'Ostatnie miejsca',2:'Wolne miejsca',3:'Wolne miejsca'};
+let currentLang='pl';
+function switchLang(lang){
+  currentLang=lang;
+  localStorage.setItem('av_lang',lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang)});
+  if(lang==='pl'){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{if(el.dataset.orig)el.textContent=el.dataset.orig});
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{if(el.dataset.origHtml)el.innerHTML=el.dataset.origHtml});
+  } else {
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      if(!el.dataset.orig)el.dataset.orig=el.textContent;
+      const k=el.getAttribute('data-i18n');
+      if(I18N[lang]?.[k])el.textContent=I18N[lang][k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      if(!el.dataset.origHtml)el.dataset.origHtml=el.innerHTML;
+      const k=el.getAttribute('data-i18n-html');
+      if(I18N_HTML[lang]?.[k])el.innerHTML=I18N_HTML[lang][k];
+    });
+  }
+  filterTours();
+}
+/* renderCard removed — integrated into showMoreTours */
+// Restore lang on load
+(function(){const s=localStorage.getItem('av_lang');if(s==='pt')setTimeout(()=>switchLang('pt'),100)})();
 
 // Start
 document.addEventListener('DOMContentLoaded', initPinGate);
