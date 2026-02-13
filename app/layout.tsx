@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: "Angloville Junior - Obóz Językowy z Native Speakerami 11-18 lat",
   description: "Przełam barierę językową w 7 dni! Obóz z Native Speakerami w formacie 1:2. Immersja językowa dla młodzieży 11-18 lat. Od 3200 zł. Sprawdź terminy!",
   keywords: "angloville, obóz językowy, native speakerzy, angielski dla młodzieży, immersja językowa, obozy językowe 2026",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
   openGraph: {
     title: "Angloville Junior - Obóz Językowy z Native Speakerami",
     description: "Przełam barierę językową w 7 dni! Format 1:2 z native speakerami.",
