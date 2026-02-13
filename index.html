@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Angloville Junior — Obóz językowy z Native Speakerami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F37021;--orange-dark:#D85E15;--navy:#0A1628;--navy-light:#1A2A44;
+  --blue:#1032CF;--gold:#FFD632;--white:#fff;--gray-50:#F8FAFC;--gray-100:#F1F5F9;
+  --gray-200:#E2E8F0;--gray-300:#CBD5E1;--gray-500:#64748B;--gray-700:#334155;
+  --gray-900:#0F172A;--green:#22C55E;--red:#EF4444;
+  --radius:12px;--shadow:0 4px 24px rgba(0,0,0,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--gray-900);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* PIN SCREEN */
+#pin-screen{position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column}
+#pin-screen.hidden{display:none}
+#pin-screen h2{color:var(--white);font-size:1.5rem;margin-bottom:24px}
+#pin-screen p{color:var(--gray-300);margin-bottom:16px;font-size:.9rem}
+#pin-input{background:var(--navy-light);border:2px solid var(--gray-500);color:var(--white);font-size:2rem;text-align:center;letter-spacing:12px;padding:16px 24px;border-radius:var(--radius);width:200px;outline:none}
+#pin-input:focus{border-color:var(--orange)}
+#pin-error{color:var(--red);margin-top:12px;font-size:.85rem;min-height:20px}
+#app{display:none}
+
+/* HEADER */
+header{background:var(--white);position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.4rem;font-weight:800;color:var(--navy)}
+.logo span{color:var(--orange)}
+.header-cta{background:var(--orange);color:var(--white);padding:10px 24px;border-radius:50px;font-weight:600;font-size:.9rem;transition:all .2s}
+.header-cta:hover{background:var(--orange-dark);transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);padding:80px 0 100px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-50px;left:0;right:0;height:100px;background:var(--white);border-radius:50% 50% 0 0}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-text h1{font-size:3rem;font-weight:900;color:var(--white);line-height:1.15;margin-bottom:20px}
+.hero-text h1 span{color:var(--orange)}
+.hero-text p{color:var(--gray-300);font-size:1.15rem;margin-bottom:32px;max-width:500px}
+.hero-badges{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.hero-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:var(--white);padding:8px 16px;border-radius:50px;font-size:.85rem;font-weight:500;backdrop-filter:blur(4px)}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--orange);color:var(--white);padding:16px 36px;border-radius:50px;font-weight:700;font-size:1.05rem;transition:all .25s;display:inline-block;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(243,112,33,.35)}
+.btn-secondary{background:transparent;color:var(--white);padding:16px 36px;border-radius:50px;font-weight:600;font-size:1.05rem;border:2px solid rgba(255,255,255,.3);transition:all .25s;display:inline-block}
+.btn-secondary:hover{border-color:var(--white);background:rgba(255,255,255,.05)}
+.hero-image{position:relative}
+.hero-image img{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.hero-stat{position:absolute;background:var(--white);padding:12px 20px;border-radius:var(--radius);box-shadow:var(--shadow);font-weight:700;font-size:.85rem}
+.hero-stat.s1{bottom:30px;left:-20px}
+.hero-stat.s2{top:30px;right:-20px}
+.hero-stat .num{color:var(--orange);font-size:1.5rem;display:block}
+
+/* SECTIONS */
+section{padding:80px 0}
+.section-label{text-transform:uppercase;font-size:.8rem;font-weight:700;letter-spacing:2px;color:var(--orange);margin-bottom:8px}
+.section-title{font-size:2.2rem;font-weight:800;color:var(--navy);margin-bottom:16px}
+.section-subtitle{color:var(--gray-500);font-size:1.1rem;max-width:600px}
+.text-center{text-align:center}
+.text-center .section-subtitle{margin:0 auto}
+
+/* INCLUDES */
+.includes{background:var(--gray-50)}
+.includes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.include-card{background:var(--white);padding:32px 24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow);transition:transform .2s}
+.include-card:hover{transform:translateY(-4px)}
+.include-card .icon{font-size:2.5rem;margin-bottom:16px}
+.include-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.include-card p{color:var(--gray-500);font-size:.85rem}
+
+/* PRICING */
+.pricing-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:48px;max-width:800px;margin-left:auto;margin-right:auto}
+.price-card{background:var(--white);border-radius:16px;padding:40px 32px;box-shadow:var(--shadow);position:relative;border:2px solid transparent;transition:all .3s}
+.price-card.featured{border-color:var(--orange);transform:scale(1.02)}
+.price-card.featured::before{content:'NAJCZĘŚCIEJ WYBIERANY';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:var(--white);padding:4px 20px;border-radius:50px;font-size:.75rem;font-weight:700;white-space:nowrap}
+.price-card h3{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.price-card .age{color:var(--gray-500);font-size:.9rem;margin-bottom:20px}
+.price-card .price{font-size:2.8rem;font-weight:900;color:var(--navy)}
+.price-card .price small{font-size:1rem;color:var(--gray-500);font-weight:400}
+.price-card .price-note{color:var(--orange);font-size:.9rem;font-weight:600;margin:8px 0 24px}
+.price-card ul{list-style:none;margin-bottom:28px}
+.price-card li{padding:8px 0;font-size:.9rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100);display:flex;align-items:flex-start;gap:8px}
+.price-card li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.price-card .btn-primary{width:100%;text-align:center}
+.discounts{margin-top:48px;background:var(--navy);border-radius:16px;padding:40px;color:var(--white)}
+.discounts h3{font-size:1.3rem;font-weight:700;margin-bottom:20px}
+.discounts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.discount-item{background:rgba(255,255,255,.08);border-radius:var(--radius);padding:24px;border:1px solid rgba(255,255,255,.1)}
+.discount-item .icon{font-size:1.8rem;margin-bottom:12px}
+.discount-item h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.discount-item p{font-size:.85rem;color:var(--gray-300)}
+
+/* SEARCH */
+.search{background:var(--gray-50)}
+.filters{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 24px;align-items:center}
+.filter-btn{padding:10px 20px;border-radius:50px;border:2px solid var(--gray-200);background:var(--white);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--gray-700)}
+.filter-btn:hover{border-color:var(--orange)}
+.filter-btn.active{background:var(--orange);color:var(--white);border-color:var(--orange)}
+.filter-select{padding:10px 20px;border-radius:50px;border:2px solid var(--gray-200);background:var(--white);font-size:.9rem;font-weight:500;cursor:pointer;color:var(--gray-700);appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.results-count{color:var(--gray-500);font-size:.9rem;margin-bottom:16px}
+.results-count strong{color:var(--navy)}
+.turnusy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.turnus-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s;cursor:pointer}
+.turnus-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.turnus-card img{width:100%;height:180px;object-fit:cover}
+.turnus-card .info{padding:20px}
+.turnus-card .date{font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:4px}
+.turnus-card .hotel{color:var(--gray-500);font-size:.85rem;margin-bottom:12px}
+.turnus-card .meta{display:flex;justify-content:space-between;align-items:center}
+.turnus-card .city{font-size:.8rem;color:var(--gray-500);display:flex;align-items:center;gap:4px}
+.status-badge{padding:4px 12px;border-radius:50px;font-size:.75rem;font-weight:700}
+.status-0{background:#FEE2E2;color:#DC2626}
+.status-1{background:#FEF3C7;color:#D97706}
+.status-2{background:#DCFCE7;color:#16A34A}
+.status-3{background:#DCFCE7;color:#16A34A}
+.turnus-card .btn-sm{display:block;margin-top:16px;background:var(--orange);color:var(--white);text-align:center;padding:10px;border-radius:8px;font-weight:600;font-size:.85rem;transition:background .2s}
+.turnus-card .btn-sm:hover{background:var(--orange-dark)}
+.no-results{text-align:center;padding:60px 20px;color:var(--gray-500)}
+.no-results .icon{font-size:3rem;margin-bottom:16px}
+
+/* FAQ */
+.faq-list{max-width:800px;margin:48px auto 0}
+.faq-item{border-bottom:1px solid var(--gray-200)}
+.faq-q{padding:20px 0;font-weight:600;font-size:1.05rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.faq-q::after{content:'+';font-size:1.5rem;color:var(--orange);font-weight:300;transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--gray-700);font-size:.95rem;line-height:1.7}
+.faq-item.open .faq-a{max-height:500px}
+.faq-a-inner{padding-bottom:20px}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--orange) 0%,#E85D10 100%);padding:80px 0;text-align:center;color:var(--white)}
+.cta-section h2{font-size:2.4rem;font-weight:900;margin-bottom:16px}
+.cta-section p{font-size:1.1rem;opacity:.9;margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto}
+.btn-white{background:var(--white);color:var(--orange);padding:16px 40px;border-radius:50px;font-weight:700;font-size:1.05rem;transition:all .25s;display:inline-block}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+
+/* FOOTER */
+footer{background:var(--navy);color:var(--gray-300);padding:48px 0 24px;font-size:.85rem}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer a{color:var(--gray-300);transition:color .2s}
+footer a:hover{color:var(--white)}
+
+/* STICKY CTA MOBILE */
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);padding:12px 24px;box-shadow:0 -4px 16px rgba(0,0,0,.1);z-index:99}
+.sticky-cta .btn-primary{width:100%;text-align:center;padding:14px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr}
+  .hero-image{display:none}
+  .hero-text h1{font-size:2.2rem}
+  .includes-grid{grid-template-columns:repeat(2,1fr)}
+  .turnusy-grid{grid-template-columns:repeat(2,1fr)}
+  .discounts-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  section{padding:60px 0}
+  .section-title{font-size:1.7rem}
+  .hero{padding:60px 0 80px}
+  .hero-text h1{font-size:1.8rem}
+  .includes-grid{grid-template-columns:1fr}
+  .pricing-cards{grid-template-columns:1fr}
+  .price-card.featured{transform:none}
+  .turnusy-grid{grid-template-columns:1fr}
+  .filters{gap:8px}
+  .filter-btn{padding:8px 14px;font-size:.8rem}
+  .sticky-cta{display:block}
+  .cta-section h2{font-size:1.7rem}
+}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(20px);transition:all .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- PIN SCREEN -->
+<div id="pin-screen">
+  <h2>🔒 Strona zabezpieczona</h2>
+  <p>Wpisz PIN aby kontynuować</p>
+  <input type="password" id="pin-input" maxlength="4" inputmode="numeric" autofocus>
+  <div id="pin-error"></div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <a href="#" class="logo">Angloville <span>Junior</span></a>
+    <a href="#turnusy" class="header-cta">Znajdź turnus →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-text">
+      <div class="hero-badges">
+        <span class="hero-badge">🇬🇧 Native Speakerzy</span>
+        <span class="hero-badge">🏔️ Obozy w Polsce</span>
+        <span class="hero-badge">📅 Ferie & Wakacje 2026</span>
+      </div>
+      <h1>Przełam bariery językowe w <span>Angielskiej Wiosce</span></h1>
+      <p>70 godzin konwersacji z native speakerami w 6 dni. Najbardziej zindywidualizowany obóz językowy dla młodzieży 11-18 lat w Europie.</p>
+      <div class="hero-buttons">
+        <a href="#turnusy" class="btn-primary">Wybierz turnus</a>
+        <a href="#cennik" class="btn-secondary">Sprawdź cenę</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://angloville.pl/wp-content/uploads/2024/10/angloville-junior-2024-1-scaled.jpg" alt="Angloville Junior - młodzież z native speakerami" loading="eager">
+      <div class="hero-stat s1"><span class="num">70h</span>konwersacji</div>
+      <div class="hero-stat s2"><span class="num">4.8★</span>Google (1925 opinii)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CO ZAWIERA -->
+<section class="includes" id="program">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Program</div>
+      <h2 class="section-title">Co zawiera obóz?</h2>
+      <p class="section-subtitle">Wszystko w jednej cenie — bez ukrytych kosztów</p>
+    </div>
+    <div class="includes-grid">
+      <div class="include-card fade-in"><div class="icon">🗣️</div><h3>70h zajęć językowych</h3><p>Konwersacje 1-na-1 z native speakerami z UK, USA, Kanady i Australii</p></div>
+      <div class="include-card fade-in"><div class="icon">🏨</div><h3>6 noclegów</h3><p>Pokoje 2-4 osobowe w sprawdzonych hotelach i ośrodkach</p></div>
+      <div class="include-card fade-in"><div class="icon">🍽️</div><h3>Pełne wyżywienie</h3><p>3 posiłki dziennie — śniadanie, obiad, kolacja</p></div>
+      <div class="include-card fade-in"><div class="icon">🚌</div><h3>Transport</h3><p>Zorganizowany transport z dużych miast do ośrodka i z powrotem</p></div>
+      <div class="include-card fade-in"><div class="icon">🎿</div><h3>Aktywności & wycieczki</h3><p>Zajęcia na świeżym powietrzu, gry zespołowe, wycieczki krajoznawcze</p></div>
+      <div class="include-card fade-in"><div class="icon">👩‍⚕️</div><h3>Opieka & bezpieczeństwo</h3><p>Kadra wychowawcza, opieka medyczna, ubezpieczenie NNW</p></div>
+      <div class="include-card fade-in"><div class="icon">📚</div><h3>Materiały dydaktyczne</h3><p>Wszystkie materiały do nauki w cenie obozu</p></div>
+      <div class="include-card fade-in"><div class="icon">📜</div><h3>Dyplom & Raport</h3><p>Dyplom ukończenia i Raport Językowy po zakończeniu kursu</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CENNIK -->
+<section id="cennik">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Cennik</div>
+      <h2 class="section-title">Przejrzyste ceny, bez niespodzianek</h2>
+      <p class="section-subtitle">Płatność w ratach 0% — do 6 wygodnych rat bez kredytu</p>
+    </div>
+    <div class="pricing-cards">
+      <div class="price-card">
+        <h3>Angloville Kids</h3>
+        <div class="age">Dla dzieci 7-11 lat</div>
+        <div class="price">4 299 <small>zł</small></div>
+        <div class="price-note">od ~717 zł / rata</div>
+        <ul>
+          <li>70h konwersacji z native speakerami</li>
+          <li>6 noclegów + pełne wyżywienie</li>
+          <li>Transport z dużych miast</li>
+          <li>Ubezpieczenie KL + NNW wliczone</li>
+          <li>Opieka wychowawcza i medyczna</li>
+          <li>Materiały + Dyplom + Raport</li>
+        </ul>
+        <a href="#turnusy" class="btn-primary">Wybierz termin</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Angloville Junior</h3>
+        <div class="age">Dla młodzieży 11-18 lat</div>
+        <div class="price">4 449 <small>zł</small></div>
+        <div class="price-note">⏳ Cena ze zniżką za wczesny zapis (reg. 4 699 zł)</div>
+        <ul>
+          <li>70h konwersacji z native speakerami</li>
+          <li>6 noclegów + pełne wyżywienie</li>
+          <li>Transport z dużych miast</li>
+          <li>Ubezpieczenie KL + NNW wliczone</li>
+          <li>Opieka wychowawcza i medyczna</li>
+          <li>Materiały + Dyplom + Raport</li>
+        </ul>
+        <a href="#turnusy" class="btn-primary">Wybierz termin</a>
+      </div>
+    </div>
+
+    <div class="discounts">
+      <h3>💰 Zniżki i oszczędności</h3>
+      <div class="discounts-grid">
+        <div class="discount-item">
+          <div class="icon">⏰</div>
+          <h4>Wczesny zapis</h4>
+          <p>Im wcześniej zapiszesz dziecko, tym niższa cena. Zniżka naliczana automatycznie od ceny regularnej.</p>
+        </div>
+        <div class="discount-item">
+          <div class="icon">🎓</div>
+          <h4>Absolwenci Angloville</h4>
+          <p>Twoje dziecko było już na obozie? Dodatkowa zniżka za ponowne uczestnictwo.</p>
+        </div>
+        <div class="discount-item">
+          <div class="icon">👥</div>
+          <h4>Polecenie znajomemu</h4>
+          <p>Poleć program nowemu klientowi — Ty otrzymasz do 300 zł zniżki, polecona osoba 50 zł.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WYSZUKIWARKA TURNUSÓW -->
+<section class="search" id="turnusy">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Terminy</div>
+      <h2 class="section-title">Znajdź idealny turnus</h2>
+      <p class="section-subtitle">76 turnusów w sezonie Ferie & Wakacje 2026</p>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-season="all">Wszystkie</button>
+      <button class="filter-btn" data-season="ferie">❄️ Ferie</button>
+      <button class="filter-btn" data-season="wakacje">☀️ Wakacje</button>
+      <select class="filter-select" id="city-filter">
+        <option value="all">📍 Wszystkie miasta</option>
+      </select>
+      <select class="filter-select" id="status-filter">
+        <option value="all">Dostępność</option>
+        <option value="available">✅ Wolne miejsca</option>
+        <option value="last">⚠️ Ostatnie miejsca</option>
+      </select>
+    </div>
+    <div class="results-count" id="results-count"></div>
+    <div class="turnusy-grid" id="turnusy-grid"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Najczęściej zadawane pytania</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Jaki poziom angielskiego potrzebuje moje dziecko?</div>
+        <div class="faq-a"><div class="faq-a-inner">Program jest dostosowany do wszystkich poziomów — od A1 do C2. Przed rozpoczęciem obozu uczestnicy wypełniają test kwalifikacyjny, na podstawie którego są przydzielani do odpowiedniej grupy. Native speakerzy dostosowują tempo konwersacji do poziomu każdego uczestnika.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Jak wygląda bezpieczeństwo na obozie?</div>
+        <div class="faq-a"><div class="faq-a-inner">Bezpieczeństwo jest priorytetem. Na obozie obecna jest kadra wychowawcza oraz opieka medyczna. Wszyscy uczestnicy są ubezpieczeni (ubezpieczenie KL 20 000 EUR i NNW 20 000 PLN — Signal Iduna). Angloville posiada wpis do Rejestru Organizatorów Turystyki oraz ważną gwarancję ubezpieczeniową.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Co dokładnie zawiera cena?</div>
+        <div class="faq-a"><div class="faq-a-inner">Cena zawiera: 70h zajęć dydaktycznych z native speakerami, 6 noclegów w pokojach 2-4 osobowych, pełne wyżywienie (3 posiłki dziennie), transport z dużych miast, materiały dydaktyczne, aktywności i wycieczki, opiekę wychowawczą i medyczną, ubezpieczenie NNW oraz dyplom i raport językowy. Nie ma żadnych dodatkowych obowiązkowych dopłat.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Czy mogę płacić w ratach?</div>
+        <div class="faq-a"><div class="faq-a-inner">Tak! Cenę można podzielić na maksymalnie 6 wygodnych rat 0% (bez kredytu). Liczba dostępnych rat zależy od terminu zapisu — im wcześniej, tym więcej rat. Szczegółowy harmonogram spłat otrzymasz w wiadomości potwierdzającej rezerwację.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Skąd jest organizowany transport?</div>
+        <div class="faq-a"><div class="faq-a-inner">Transport jest organizowany z dużych miast w zależności od turnusu — Warszawa, Kraków, Katowice, Poznań, Wrocław, Łódź, Lublin. Dokładne miasto zbiórki jest podane przy każdym turnusie w wyszukiwarce powyżej.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kim są native speakerzy?</div>
+        <div class="faq-a"><div class="faq-a-inner">To anglojęzyczni uczestnicy z krajów takich jak Wielka Brytania, USA, Kanada, Australia i Irlandia. Angloville organizuje dla nich wymianę kulturową — w zamian za udział w programie prowadzą konwersacje z polskimi uczestnikami. Dzięki temu dzieci rozmawiają z prawdziwymi ludźmi, nie z lektorem.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Czy mogę zrezygnować i odzyskać pieniądze?</div>
+        <div class="faq-a"><div class="faq-a-inner">Warunki rezygnacji reguluje regulamin dostępny na stronie angloville.pl. Dodatkowo można wykupić opcjonalne ubezpieczenie od kosztów rezygnacji (Signal Iduna) — wariant standard 279 zł lub rozszerzony 409 zł — które pokrywa 100% kosztów w przypadku rezygnacji z przyczyn losowych.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Gotowy na przygodę językową?</h2>
+    <p>Zapisz dziecko na obóz i daj mu szansę na przełamanie bariery językowej — w 6 dni.</p>
+    <a href="#turnusy" class="btn-white">Wybierz turnus →</a>
+    <p style="margin-top:20px;font-size:.9rem;opacity:.8">Pytania? Zadzwoń: <a href="tel:+48533655147" style="color:var(--white);text-decoration:underline">533 655 147</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div>© 2026 Angloville sp. z o.o. | <a href="https://angloville.pl" target="_blank">angloville.pl</a></div>
+    <div>
+      <a href="https://angloville.pl/regulamin-av-angloville-junior/" target="_blank">Regulamin</a> · 
+      <a href="tel:+48533655147">533 655 147</a> · 
+      <a href="mailto:kontakt@angloville.pl">kontakt@angloville.pl</a>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <a href="#turnusy" class="btn-primary">Znajdź turnus →</a>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// TURNUS DATA
+const TURNUSY = [{"i":1,"df":"2026-02-15","dt":"2026-02-21","tx":"15 – 21 lutego","s":0,"m":"Poznań / Katowice / Łódź / Lublin","h":"Wityng","w":"1","l":"https://app.angloville.pl/application/cb8c7812-d4ba-4de5-b2a2-f41695a0e0a2","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-wityng-mikorzyn-fot-2-360x250.jpg","sn":"ferie"},{"i":2,"df":"2026-02-22","dt":"2026-02-28","tx":"22 – 28 lutego","s":0,"m":"Poznań / Katowice","h":"Wawrzyniak","w":"1","l":"https://app.angloville.pl/application/cb8c7812-d4ba-4de5-b2a2-f41695a0e0a2","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"ferie"},{"i":3,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/386c339e-b47f-4af8-9160-6d5fa5365cad","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":4,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/386c339e-b47f-4af8-9160-6d5fa5365cad","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":5,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Warszawa","h":"Osada Danków","w":"3","l":"https://app.angloville.pl/application/0f08b673-475b-44c9-ba99-5c1fa5b5a754","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-dankow-wielimowo-fot-1-360x250.jpg","sn":"wakacje"},{"i":6,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Warszawa","h":"Kurpia Arte","w":"3","l":"https://app.angloville.pl/application/0f08b673-475b-44c9-ba99-5c1fa5b5a754","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-kurpia-arte-nowogrod-fot-1-360x250.jpg","sn":"wakacje"},{"i":7,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/e2ccd985-2c96-4615-b6a0-cbf3bc215c21","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":8,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Wrocław","h":"Chojnik","w":"3","l":"https://app.angloville.pl/application/e2ccd985-2c96-4615-b6a0-cbf3bc215c21","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-chojnik-jelenia-gora-karpacz-szklarska-poreba-fot-1-360x250.jpg","sn":"wakacje"},{"i":9,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Katowice / Kraków","h":"Limba Grand","w":"3","l":"https://app.angloville.pl/application/f3098c9e-727f-4ce6-b06b-7c9adfcdfc9b","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-limba-grand-poronin-fot-1-360x250.jpg","sn":"wakacje"},{"i":10,"df":"2026-06-28","dt":"2026-07-04","tx":"28 czerwca – 04 lipca","s":2,"m":"Katowice / Kraków","h":"Willa Tatry","w":"3","l":"https://app.angloville.pl/application/f3098c9e-727f-4ce6-b06b-7c9adfcdfc9b","img":"https://angloville.pl/wp-content/uploads/2022/08/willa-tatry-male-ciche-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":11,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Katowice / Kraków","h":"Ameliówka","w":"3","l":"https://app.angloville.pl/application/71cf45d1-68ac-439a-85e1-b2117c2fe921","img":"https://angloville.pl/wp-content/uploads/2022/10/87028258_1285669294976548_447312348433088512_n-360x250.jpg","sn":"wakacje"},{"i":12,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Katowice / Kraków","h":"Willa Tatry","w":"3","l":"https://app.angloville.pl/application/71cf45d1-68ac-439a-85e1-b2117c2fe921","img":"https://angloville.pl/wp-content/uploads/2022/08/willa-tatry-male-ciche-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":13,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Katowice / Kraków","h":"Fero Lux","w":"3","l":"https://app.angloville.pl/application/44db6901-a9d0-4552-b91f-c83f162b13d2","img":"https://angloville.pl/wp-content/uploads/2022/12/fero-lux-bas.z-zew.-1-scaled-1-360x250.jpg","sn":"wakacje"},{"i":14,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Wrocław","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/44db6901-a9d0-4552-b91f-c83f162b13d2","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":15,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Wrocław","h":"Magiczny Zakątek Raszowa","w":"3","l":"https://app.angloville.pl/application/f74f34dc-b2af-4792-8ec1-ff2a04f1756c","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-magiczny-zakatek-raszowa-fot-1-360x250.jpg","sn":"wakacje"},{"i":16,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Warszawa","h":"Kurpia Arte","w":"3","l":"https://app.angloville.pl/application/f74f34dc-b2af-4792-8ec1-ff2a04f1756c","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-kurpia-arte-nowogrod-fot-1-360x250.jpg","sn":"wakacje"},{"i":17,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":1,"m":"Warszawa","h":"Lipowy Most","w":"2","l":"https://app.angloville.pl/application/6b170c5b-f31a-47b0-9b08-29adeb7a4330","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":18,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/6b170c5b-f31a-47b0-9b08-29adeb7a4330","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":19,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/ffb5412d-8932-4668-98a2-658b3076d456","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":20,"df":"2026-07-05","dt":"2026-07-11","tx":"05 – 11 lipca","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/ffb5412d-8932-4668-98a2-658b3076d456","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":21,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/057fc93e-69ac-4b5e-b6ce-f50e3393b0df","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":22,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":1,"m":"Katowice / Kraków","h":"Magiczny Zakątek Raszowa","w":"2","l":"https://app.angloville.pl/application/057fc93e-69ac-4b5e-b6ce-f50e3393b0df","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-magiczny-zakatek-raszowa-fot-1-360x250.jpg","sn":"wakacje"},{"i":23,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Katowice / Kraków","h":"Willa Tatry","w":"3","l":"https://app.angloville.pl/application/ff66d4d8-3ac1-4b99-83ab-4ee5f24b09b1","img":"https://angloville.pl/wp-content/uploads/2022/08/willa-tatry-male-ciche-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":24,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Katowice / Kraków","h":"Fero Lux","w":"3","l":"https://app.angloville.pl/application/ff66d4d8-3ac1-4b99-83ab-4ee5f24b09b1","img":"https://angloville.pl/wp-content/uploads/2022/12/fero-lux-bas.z-zew.-1-scaled-1-360x250.jpg","sn":"wakacje"},{"i":25,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":1,"m":"Wrocław","h":"Chojnik","w":"2","l":"https://app.angloville.pl/application/84494e33-1439-43b1-9d57-e031bba182d8","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-chojnik-jelenia-gora-karpacz-szklarska-poreba-fot-1-360x250.jpg","sn":"wakacje"},{"i":26,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Wrocław","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/84494e33-1439-43b1-9d57-e031bba182d8","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":27,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Warszawa","h":"Ameliówka","w":"3","l":"https://app.angloville.pl/application/91db8e0f-c803-4593-9f61-2df70f97a7f8","img":"https://angloville.pl/wp-content/uploads/2022/10/87028258_1285669294976548_447312348433088512_n-360x250.jpg","sn":"wakacje"},{"i":28,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Warszawa","h":"Lipowy Most","w":"3","l":"https://app.angloville.pl/application/91db8e0f-c803-4593-9f61-2df70f97a7f8","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":29,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/41d4f3ff-6447-458c-9af3-1785f3b37ab9","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":30,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/41d4f3ff-6447-458c-9af3-1785f3b37ab9","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":31,"df":"2026-07-12","dt":"2026-07-18","tx":"12 – 18 lipca","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/a4d0deea-e741-4bee-8a9a-a4526018a6a9","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":32,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Katowice / Kraków","h":"Willa Tatry","w":"3","l":"https://app.angloville.pl/application/a4d0deea-e741-4bee-8a9a-a4526018a6a9","img":"https://angloville.pl/wp-content/uploads/2022/08/willa-tatry-male-ciche-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":33,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":1,"m":"Katowice / Kraków","h":"Fero Lux","w":"2","l":"https://app.angloville.pl/application/605f71d8-c747-42bc-88c0-06f276738b6e","img":"https://angloville.pl/wp-content/uploads/2022/12/fero-lux-bas.z-zew.-1-scaled-1-360x250.jpg","sn":"wakacje"},{"i":34,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Wrocław","h":"Magiczny Zakątek Raszowa","w":"3","l":"https://app.angloville.pl/application/605f71d8-c747-42bc-88c0-06f276738b6e","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-magiczny-zakatek-raszowa-fot-1-360x250.jpg","sn":"wakacje"},{"i":35,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Poznań","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/38f2468f-59eb-42df-822d-95f447fc2e99","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":36,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/38f2468f-59eb-42df-822d-95f447fc2e99","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":37,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Warszawa","h":"Osada Danków","w":"3","l":"https://app.angloville.pl/application/08e3d06d-6e9f-4a71-a749-c9eab53516db","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-dankow-wielimowo-fot-1-360x250.jpg","sn":"wakacje"},{"i":38,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Warszawa","h":"Lipowy Most","w":"3","l":"https://app.angloville.pl/application/08e3d06d-6e9f-4a71-a749-c9eab53516db","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":39,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/2a4fde7a-1140-48bf-81dc-c4c9e8b04f1b","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":40,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/2a4fde7a-1140-48bf-81dc-c4c9e8b04f1b","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":41,"df":"2026-07-19","dt":"2026-07-25","tx":"19 – 25 lipca","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/7683c739-2d87-4a02-bc8f-4d434076645a","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":42,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Poznań","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/7683c739-2d87-4a02-bc8f-4d434076645a","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":43,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Katowice / Kraków","h":"Limba Grand","w":"3","l":"https://app.angloville.pl/application/01bcd98a-003f-438f-bfb2-f0edd409bf88","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-limba-grand-poronin-fot-1-360x250.jpg","sn":"wakacje"},{"i":44,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Katowice / Kraków","h":"Ameliówka","w":"3","l":"https://app.angloville.pl/application/01bcd98a-003f-438f-bfb2-f0edd409bf88","img":"https://angloville.pl/wp-content/uploads/2022/10/87028258_1285669294976548_447312348433088512_n-360x250.jpg","sn":"wakacje"},{"i":45,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Wrocław","h":"Chojnik","w":"3","l":"https://app.angloville.pl/application/a7498405-e15b-47b6-ba16-08fa0e62fe6e","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-chojnik-jelenia-gora-karpacz-szklarska-poreba-fot-1-360x250.jpg","sn":"wakacje"},{"i":46,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/a7498405-e15b-47b6-ba16-08fa0e62fe6e","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":47,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/2208bdc5-9467-4a73-9b5c-9bdb755401d3","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":48,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/2208bdc5-9467-4a73-9b5c-9bdb755401d3","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":49,"df":"2026-07-26","dt":"2026-08-01","tx":"26 lipca – 01 sierpnia","s":2,"m":"Warszawa","h":"Lipowy Most","w":"3","l":"https://app.angloville.pl/application/da766329-24f1-45c7-bb13-dcd16e62e801","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":50,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Katowice / Kraków","h":"Limba Grand","w":"3","l":"https://app.angloville.pl/application/da766329-24f1-45c7-bb13-dcd16e62e801","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-limba-grand-poronin-fot-1-360x250.jpg","sn":"wakacje"},{"i":51,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Katowice / Kraków","h":"Magiczny Zakątek Raszowa","w":"3","l":"https://app.angloville.pl/application/a2524328-1457-49f6-9bd8-8d256059522d","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-magiczny-zakatek-raszowa-fot-1-360x250.jpg","sn":"wakacje"},{"i":52,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Wrocław","h":"Chojnik","w":"3","l":"https://app.angloville.pl/application/a2524328-1457-49f6-9bd8-8d256059522d","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-chojnik-jelenia-gora-karpacz-szklarska-poreba-fot-1-360x250.jpg","sn":"wakacje"},{"i":53,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/543ceac6-8aa7-4f13-af7a-86b8458f3f03","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":54,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Warszawa","h":"Lipowy Most","w":"3","l":"https://app.angloville.pl/application/543ceac6-8aa7-4f13-af7a-86b8458f3f03","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":55,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/a0de38d4-4ab4-4f3b-ab5c-f2466b602511","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":56,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/a0de38d4-4ab4-4f3b-ab5c-f2466b602511","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":57,"df":"2026-08-02","dt":"2026-08-08","tx":"02 – 08 sierpnia","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/032481a2-27bd-41c3-8590-1b32a17d70f6","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":58,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/032481a2-27bd-41c3-8590-1b32a17d70f6","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":59,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/d1e8846f-70b8-4f89-ac09-0613c52ff5c8","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":60,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/d1e8846f-70b8-4f89-ac09-0613c52ff5c8","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":61,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/8ef2c0d8-4048-490c-a5bc-1e839785d4e8","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":62,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Wrocław","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/8ef2c0d8-4048-490c-a5bc-1e839785d4e8","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":63,"df":"2026-08-09","dt":"2026-08-15","tx":"09 – 15 sierpnia","s":2,"m":"Katowice / Kraków","h":"Magiczny Zakątek Raszowa","w":"3","l":"https://app.angloville.pl/application/c9e79a7e-29d1-4aa6-8e01-9fb7ca70d233","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-magiczny-zakatek-raszowa-fot-1-360x250.jpg","sn":"wakacje"},{"i":64,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/c9e79a7e-29d1-4aa6-8e01-9fb7ca70d233","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":65,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Katowice / Kraków","h":"Fero Lux","w":"3","l":"https://app.angloville.pl/application/abe7a277-52f8-4466-95c7-ecf7fd76ea70","img":"https://angloville.pl/wp-content/uploads/2022/12/fero-lux-bas.z-zew.-1-scaled-1-360x250.jpg","sn":"wakacje"},{"i":66,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Wrocław","h":"Wawrzyniak","w":"3","l":"https://app.angloville.pl/application/abe7a277-52f8-4466-95c7-ecf7fd76ea70","img":"https://angloville.pl/wp-content/uploads/2022/12/wawrzyniak3-360x250.jpg","sn":"wakacje"},{"i":67,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/b41bdae3-84f9-49c6-a362-6ffcd9bc06bb","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":68,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Warszawa","h":"Lipowy Most","w":"3","l":"https://app.angloville.pl/application/b41bdae3-84f9-49c6-a362-6ffcd9bc06bb","img":"https://angloville.pl/wp-content/uploads/2022/04/hotel-lipowy-most-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":69,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/550822eb-1bd1-462e-8658-b7c8e66f6702","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":70,"df":"2026-08-16","dt":"2026-08-22","tx":"16 – 22 sierpnia","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/550822eb-1bd1-462e-8658-b7c8e66f6702","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":71,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Warszawa","h":"Niegocin Resort","w":"3","l":"https://app.angloville.pl/application/550822eb-1bd1-462e-8658-b7c8e66f6702","img":"https://angloville.pl/wp-content/uploads/2022/12/niegocin3-360x250.jpeg","sn":"wakacje"},{"i":72,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Warszawa","h":"Osada 49","w":"3","l":"https://app.angloville.pl/application/550822eb-1bd1-462e-8658-b7c8e66f6702","img":"https://angloville.pl/wp-content/uploads/2022/08/osada-49-czastkowo-elganowo-zdjecie-fot-1-360x250.jpg","sn":"wakacje"},{"i":73,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Warszawa","h":"Paradiso","w":"3","l":"https://app.angloville.pl/application/ec02b1f0-5836-44b1-858a-68e53f06fc5c","img":"https://angloville.pl/wp-content/uploads/2022/12/basen-hotel-paradiso5-360x250.jpeg","sn":"wakacje"},{"i":74,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Poznań","h":"Dwór Pomorski","w":"3","l":"https://app.angloville.pl/application/ec02b1f0-5836-44b1-858a-68e53f06fc5c","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-dwor-pomorski-drawski-park-krajobrazowy-luboradza-fot-1-360x250.jpg","sn":"wakacje"},{"i":75,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Wrocław","h":"Chojnik","w":"3","l":"https://app.angloville.pl/application/d13b0503-a17f-458b-9898-c07d1a66eedd","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-chojnik-jelenia-gora-karpacz-szklarska-poreba-fot-1-360x250.jpg","sn":"wakacje"},{"i":76,"df":"2026-08-23","dt":"2026-08-29","tx":"23 – 29 sierpnia","s":2,"m":"Katowice / Kraków","h":"Limba Grand","w":"3","l":"https://app.angloville.pl/application/d13b0503-a17f-458b-9898-c07d1a66eedd","img":"https://angloville.pl/wp-content/uploads/2022/08/hotel-limba-grand-poronin-fot-1-360x250.jpg","sn":"wakacje"}]
+;
+
+// PIN
+(function(){
+  const PIN = '0524';
+  const KEY = 'av_pin_ok';
+  if(document.cookie.includes(KEY+'=1')){
+    document.getElementById('pin-screen').classList.add('hidden');
+    document.getElementById('app').style.display='block';
+    return;
+  }
+  const input = document.getElementById('pin-input');
+  const error = document.getElementById('pin-error');
+  input.addEventListener('input', function(){
+    if(this.value.length === 4){
+      if(this.value === PIN){
+        document.cookie = KEY+'=1;max-age=604800;path=/';
+        document.getElementById('pin-screen').classList.add('hidden');
+        document.getElementById('app').style.display='block';
+      } else {
+        error.textContent = 'Nieprawidłowy PIN';
+        this.value = '';
+        this.style.borderColor = '#EF4444';
+        setTimeout(()=>{this.style.borderColor='';error.textContent=''},2000);
+      }
+    }
+  });
+})();
+
+// STATUS LABELS
+const STATUS = {0:'Wyprzedany',1:'Ostatnie miejsca',2:'Wolne miejsca',3:'Wolne miejsca'};
+
+// POPULATE CITY FILTER
+const cities = [...new Set(TURNUSY.map(t=>t.m))].sort();
+const citySelect = document.getElementById('city-filter');
+cities.forEach(c=>{
+  const o=document.createElement('option');o.value=c;o.textContent=c;
+  citySelect.appendChild(o);
+});
+
+// RENDER
+function render(){
+  const season = document.querySelector('.filter-btn.active')?.dataset.season || 'all';
+  const city = citySelect.value;
+  const status = document.getElementById('status-filter').value;
+
+  let filtered = TURNUSY;
+  if(season!=='all') filtered=filtered.filter(t=>t.sn===season);
+  if(city!=='all') filtered=filtered.filter(t=>t.m===city);
+  if(status==='available') filtered=filtered.filter(t=>t.s>=2);
+  if(status==='last') filtered=filtered.filter(t=>t.s===1);
+
+  document.getElementById('results-count').innerHTML=
+    `Znaleziono <strong>${filtered.length}</strong> turnus${filtered.length===1?'':'ów'} z ${TURNUSY.length}`;
+
+  const grid=document.getElementById('turnusy-grid');
+  if(!filtered.length){
+    grid.innerHTML='<div class="no-results" style="grid-column:1/-1"><div class="icon">🔍</div><p>Brak turnusów dla wybranych filtrów. Spróbuj zmienić kryteria.</p></div>';
+    return;
+  }
+
+  grid.innerHTML=filtered.map(t=>`
+    <div class="turnus-card fade-in visible">
+      <img src="${t.img}" alt="${t.h}" loading="lazy" onerror="this.style.background='#E2E8F0';this.style.minHeight='180px'">
+      <div class="info">
+        <div class="date">${t.tx}</div>
+        <div class="hotel">🏨 ${t.h}</div>
+        <div class="meta">
+          <div class="city">📍 ${t.m}</div>
+          <span class="status-badge status-${t.s}">${STATUS[t.s]||'Sprawdź'}</span>
+        </div>
+        ${t.s>=1?`<a href="${t.l}" target="_blank" class="btn-sm">Zapisz się →</a>`
+          :`<div style="margin-top:16px;text-align:center;color:var(--gray-500);font-size:.85rem">Wyprzedany</div>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+// FILTER EVENTS
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    render();
+  });
+});
+citySelect.addEventListener('change',render);
+document.getElementById('status-filter').addEventListener('change',render);
+
+render();
+
+// FAQ ACCORDION
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',function(){
+    this.parentElement.classList.toggle('open');
+  });
+});
+
+// SCROLL ANIMATIONS
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.15});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
