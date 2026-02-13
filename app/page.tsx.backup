@@ -234,9 +234,126 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Terminy i ceny - Z KOLOROWYMI BADGES */}
+      <section id="terminy" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-gray-900">
+            Terminy i <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-400">ceny</span>
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-xl">
+            Wybierz termin i miejsce wyjazdu 📅✈️
+          </p>
 
-      {/* Terminy i ceny - Z FILTRAMI */}
-      <TerminySection />
+          {/* Letnie terminy */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <h3 className="text-3xl font-bold text-gray-800">☀️ Wakacje 2026</h3>
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                GORĄCE MIEJSCA! 🔥
+              </span>
+            </div>
+            <div className="grid gap-6">
+              {[
+                { date: '28 czerwca – 04 lipca', price: '3200', location: 'Warszawa', hotel: 'Niegocin Resort (Mazury)', status: 'Otwarte zapisy', badge: 'new', badgeColor: 'from-green-400 to-emerald-500' },
+                { date: '28 czerwca – 04 lipca', price: '3100', location: 'Poznań', hotel: 'Dwór Pomorski', status: 'Otwarte zapisy', badge: 'new', badgeColor: 'from-green-400 to-emerald-500' },
+                { date: '28 czerwca – 04 lipca', price: '3150', location: 'Wrocław', hotel: 'Chojnik (Karkonosze)', status: 'Otwarte zapisy', badge: 'new', badgeColor: 'from-green-400 to-emerald-500' },
+                { date: '28 czerwca – 04 lipca', price: '3200', location: 'Katowice/Kraków', hotel: 'Limba Grand (Tatry)', status: 'Otwarte zapisy', badge: 'new', badgeColor: 'from-green-400 to-emerald-500' },
+                { date: '05 – 11 lipca', price: '3150', location: 'Katowice/Kraków', hotel: 'Ameliówka (Świętokrzyskie)', status: 'Otwarte zapisy', badge: null, badgeColor: '' },
+                { date: '05 – 11 lipca', price: '3200', location: 'Warszawa', hotel: 'Lipowy Most (Podlasie)', status: 'Ostatnie miejsca', badge: 'hot', badgeColor: 'from-red-500 to-orange-500' },
+                { date: '12 – 18 lipca', price: '3100', location: 'Poznań', hotel: 'Dwór Pomorski', status: 'Otwarte zapisy', badge: null, badgeColor: '' },
+              ].map((term, idx) => (
+                <div key={idx} className="group bg-white border-2 border-gray-200 rounded-2xl p-8 hover:border-orange-400 transition-all hover:shadow-2xl relative overflow-hidden">
+                  {term.badge === 'new' && (
+                    <span className={`absolute top-6 right-6 bg-gradient-to-r ${term.badgeColor} text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg`}>
+                      ✨ NOWY TERMIN!
+                    </span>
+                  )}
+                  {term.badge === 'hot' && (
+                    <span className={`absolute top-6 right-6 bg-gradient-to-r ${term.badgeColor} text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg`}>
+                      🔥 OSTATNIE MIEJSCA!
+                    </span>
+                  )}
+                  <div className="grid md:grid-cols-5 gap-6 items-center">
+                    <div className="md:col-span-2">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
+                          <Calendar className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="font-bold text-gray-900 text-lg">{term.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 ml-1">
+                        <MapPin className="w-5 h-5 text-orange-500" />
+                        <span className="text-sm font-medium">Wyjazd z: {term.location}</span>
+                      </div>
+                    </div>
+                    <div className="md:col-span-2">
+                      <p className="font-semibold text-gray-900 text-lg mb-1">{term.hotel}</p>
+                      <p className="text-sm text-green-600 font-semibold">✅ {term.status}</p>
+                    </div>
+                    <div className="text-center md:text-right">
+                      <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-400 mb-3">{term.price} zł</div>
+                      <a 
+                        href="https://angloville.pl/panel-klienta/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-gradient-to-r from-orange-500 to-yellow-400 text-white px-8 py-3 rounded-xl font-bold hover:from-orange-600 hover:to-yellow-500 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                      >
+                        🎉 Zapisz się!
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Ferie zimowe */}
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <h3 className="text-3xl font-bold text-gray-800">❄️ Ferie zimowe 2026</h3>
+              <span className="bg-gray-300 text-gray-600 px-4 py-2 rounded-full text-sm font-bold">
+                WYPRZEDANE ✅
+              </span>
+            </div>
+            <div className="grid gap-6 opacity-60">
+              {[
+                { date: '15 – 21 lutego', price: '3100', location: 'Poznań/Katowice/Łódź/Lublin', hotel: 'Wityng' },
+                { date: '22 – 28 lutego', price: '3100', location: 'Poznań/Katowice', hotel: 'Wawrzyniak' },
+              ].map((term, idx) => (
+                <div key={idx} className="bg-gray-100 border-2 border-gray-300 rounded-2xl p-8">
+                  <div className="grid md:grid-cols-5 gap-6 items-center">
+                    <div className="md:col-span-2">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 bg-gray-400 rounded-xl flex items-center justify-center">
+                          <Calendar className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="font-bold text-gray-700 text-lg">{term.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 ml-1">
+                        <MapPin className="w-5 h-5" />
+                        <span className="text-sm">Wyjazd z: {term.location}</span>
+                      </div>
+                    </div>
+                    <div className="md:col-span-2">
+                      <p className="font-semibold text-gray-700 text-lg mb-1">{term.hotel}</p>
+                      <p className="text-sm text-red-600 font-semibold">❌ Wyprzedane</p>
+                    </div>
+                    <div className="text-center md:text-right">
+                      <div className="text-4xl font-bold text-gray-500 mb-3">{term.price} zł</div>
+                      <button 
+                        disabled
+                        className="inline-block bg-gray-400 text-white px-8 py-3 rounded-xl font-bold cursor-not-allowed"
+                      >
+                        Wyprzedane
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Co zawiera cena - Z LEPSZYM DESIGNEM */}
       <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
